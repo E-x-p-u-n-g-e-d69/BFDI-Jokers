@@ -1,0 +1,14 @@
+{
+	"id": "bfdi",
+	"name": "BFDI",
+	"author": ["0x455850554E474544"],
+	"description": "A mod based on the BFDI series.",
+	"prefix": "bfdi",
+	"main_file": "main.lua",
+	"priority": 0,
+	"version": "1.0.0~ALPHA",
+	"dependencies": [
+        "Steamodded (>=1.0.0~)",
+        "Talisman (>=1.0.0~)"
+    ]
+}
