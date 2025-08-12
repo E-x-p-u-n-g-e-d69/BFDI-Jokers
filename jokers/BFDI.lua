@@ -1052,6 +1052,59 @@ SMODS.Joker {
         end 
     end,
 }
+
+SMODS.Joker {
+    key = "blocky",
+    loc_txt = {
+        name = "Blocky",
+        text = {
+            "This joker gains {X:mult,C:white}X#1#{} Mult",
+            "if the sum of the ranks of all scored cards",
+            "is a perfect square",
+            "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} mult)}"
+        }
+    },
+    config = {
+        extra = {
+            xmult_gain = 0.5,
+            xmult = 1
+        }
+    },
+    rarity = 2,
+    atlas = "BFDI",
+    pos = {
+        x = 0,
+        y = 2
+    },
+    cost = 6,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    rental_compat = true,
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+                card.ability.extra.xmult_gain,
+                card.ability.extra.xmult
+            }
+        }
+    end,
+    calculate = function(self, card, context)
+        if context.before and not context.blueprint and context.cardarea == G.PLAY and then
+            card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_gain
+            return {
+                message = localize('k_upgrade_ex'),
+                colour = G.C.MULT,
+                message_card = card
+            }
+        end
+        if context.joker_main then
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
+    end,
+}
 --[[
 SMODS.Joker {
     key = "",
