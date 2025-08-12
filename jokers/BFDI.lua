@@ -13,9 +13,9 @@ SMODS.Joker{
     loc_txt = { -- local text
         name = 'Firey',
         text = {
-          'If card played is red',
-          'gain {X:mult,C:white}X#2#{} mult',
-          "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} mult)"
+          'If card played is {C:mult}red{}',
+          'this joker gains {X:mult,C:white}X#2#{} Mult',
+          "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
         },
     },
     atlas = 'BFDI',
@@ -72,8 +72,8 @@ SMODS.Joker{
         name = 'Leafy',
         text = {
           'If card played is black',
-          'gain {X:mult,C:white}X#2#{} mult',
-          "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} mult)"
+          'this joker gains {X:mult,C:white}X#2#{} Mult',
+          "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
         },
     },
     atlas = 'BFDI',
@@ -126,7 +126,7 @@ SMODS.Joker{
     loc_txt = {
         name = 'Bubble',
         text = {
-            "{X:mult,C:white}X#1#{} mult",
+            "{X:mult,C:white}X#1#{} Mult",
             "{C:green,E:1}#2# in #3#{} chance this",
             "card is destroyed",
             "at end of round",
@@ -204,8 +204,8 @@ SMODS.Joker{
     loc_txt = {
         name = 'Pencil',
         text = {
-            "{C:mult}+#1#{} mult if",
-            "played card has an {C:enhanced}enhancement{}",
+            "{C:mult}+#1#{} Mult if",
+            "scored card has an {C:enhanced}enhancement{}",
         }
     },
     config = {
@@ -243,8 +243,8 @@ SMODS.Joker{
     loc_txt = {
         name = 'Match',
         text = {
-            "{C:mult}+#1#{} mult if",
-            "played card has no {C:enhanced}enhancement{}",
+            "{C:mult}+#1#{} Mult if",
+            "scored card doesn't have an {C:enhanced}enhancement{}",
         }
     },
     config = {
@@ -276,14 +276,14 @@ SMODS.Joker{
         end
     end
 }
--- flower
+-- flower TODO: add debuff cross
 SMODS.Joker {
     key = "flower",
     loc_txt = {
         name = "Flower",
         text = {
-            "{X:mult,C:white}X#1#{} mult",
-            "{C:red}disabled{} in {C:attention}boss blinds{}"
+            "{X:mult,C:white}X#1#{} Mult",
+            "{C:attention}disabled{} in {C:attention}boss blinds{}"
         }
     },
     config = {
@@ -326,8 +326,8 @@ SMODS.Joker {
     loc_txt = {
         name = "Pin",
         text = {
-            "{C:mult}+#1#{} mult if played",
-            "card is of a sharp suit",
+            "{C:mult}+#1#{} Mult if scored",
+            "card is of a {C:attention}sharp{} suit",
         }
     },
     config = {
@@ -364,8 +364,8 @@ SMODS.Joker {
     loc_txt = {
         name = "Coiny",
         text = {
-            "{C:mult}+#1#{} mult if played",
-            "card is of a round suit",
+            "{C:mult}+#1#{} Mult if scored",
+            "card is of a {C:attention}round{} suit",
         }
     },
     config = {
@@ -402,7 +402,7 @@ SMODS.Joker {
     loc_txt = {
         name = "Golf Ball",
         text = {
-            "Gives the leftmost card of scoring hand",
+            "Gives the {C:attention}leftmost{} card of scoring hand",
             "an {C:edition}edition{}",
             "{C:inactive}(Overwrites current edition, Excludes {C:dark_edition}Negative{C:inactive}){}"
         }
@@ -442,7 +442,7 @@ SMODS.Joker {
     loc_txt = {
         name = "Tennis Ball",
         text = {
-            "Gives the leftmost card of scoring hand",
+            "Gives the {C:attention}leftmost{} card of scoring hand",
             "a {C:edition}seal{}",
             "{C:inactive}(Overwrites current seal){}"
         }
@@ -482,9 +482,9 @@ SMODS.Joker {
     loc_txt = {
         name = "Teardrop",
         text = {
-            "{X:chips,C:white}X#1#{C:chips} chips{} and {X:mult,C:white}X#2#{C:mult} mult{}",
-            "if played hand consists of",
-            "only {C:red}debuffed{} cards"
+            "{X:chips,C:white}X#1#{C:chips} Chips{} and {X:mult,C:white}X#2#{C:mult} Mult{}",
+            "if scoring hand consists of",
+            "only {C:attention}debuffed{} cards"
         }
     },
     config = {
@@ -537,7 +537,7 @@ SMODS.Joker {
         text = {
             "Cards with the rank of the factorial of the difference of",
             "the square of the number of spacial dimensions in this universe,",
-            "and one more than the smallest perfect number each give {X:mult,C:white}X#1#{} mult",
+            "and one more than the smallest perfect number each give {X:mult,C:white}X#1#{} Mult",
         }
     },
     config = {
@@ -573,12 +573,12 @@ SMODS.Joker {
 }
 -- ice cube
 SMODS.Joker {
-    key = "ice_cube",
+    key = "icecube",
     loc_txt = {
         name = "Ice Cube",
         text = {
-            "This joker gains {C:chips}+#1#{} chip(s)",
-            "for each pip on the triggered card.",
+            "This joker gains {C:chips}+#1#{} Chip(s)",
+            "for each pip on the scored card",
             "{C:inactive}(Currently {C:chips}+#2#{C:inactive} chips)",
             "{C:inactive}(Face cards have 1 pip)"
         }
@@ -636,9 +636,9 @@ SMODS.Joker {
     loc_txt = {
         name = "Rocky",
         text = {
-            "This joker gains {X:dark_edition, C:white}^#1#{} mult",
-            "if played hand is a flush five",
-            "{C:inactive}(Currently {X:dark_edition, C:white}^#2#{C:inactive} mult)"
+            "This joker gains {X:dark_edition, C:white}^#1#{} Mult",
+            "if played hand is a {C:attention}Flush Five{}",
+            "{C:inactive}(Currently {X:dark_edition, C:white}^#2#{C:inactive} Mult)"
         }
     },
     config = {
@@ -667,22 +667,22 @@ SMODS.Joker {
         }
     end,
     calculate = function(self, card, context)
-    if context.before and next(context.poker_hands["Flush Five"]) and not context.blueprint then
-        card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_gain
-        return {
-            message = localize("k_upgrade_ex"),
-            colour = G.C.DARK_EDITION,
-            message_card = card
-        }
-    end
-    if context.joker_main then
-        return {
-            Emult_mod = card.ability.extra.Emult,
-            message = "^" .. number_format(card.ability.extra.Emult) .. " mult",
-            colour = G.C.DARK_EDITION,
-        }
-    end
-end,
+        if context.before and next(context.poker_hands["Flush Five"]) and not context.blueprint then
+            card.ability.extra.Emult = card.ability.extra.Emult + card.ability.extra.Emult_gain
+            return {
+                message = localize("k_upgrade_ex"),
+                colour = G.C.DARK_EDITION,
+                message_card = card
+            }
+        end
+        if context.joker_main then
+            return {
+                Emult_mod = card.ability.extra.Emult,
+                message = "^" .. number_format(card.ability.extra.Emult) .. " Mult",
+                colour = G.C.DARK_EDITION,
+            }
+        end
+    end,
 }
 -- snowball
 SMODS.Joker {
@@ -691,7 +691,7 @@ SMODS.Joker {
         name = "Snowball",
         text = {
             "Has a {C:green}#1# in #2#{} chance to create a",
-            "{C:tarot}Strength{} card when a card is played"
+            "{C:tarot}Strength{} card when a card is scored"
         }
     },
     config = {
@@ -820,9 +820,9 @@ SMODS.Joker {
     loc_txt = {
         name = "Pen",
         text = {
-            "Give {C:mult}+#1#{} mult for each 4 triggered",
-            "Gives {X:mult,C:white}X#2#{} mult instead if held for #5# rounds",
-            "Gives {X:dark_edition,C:white}^#3#{} mult instead if held for #6# rounds",
+            "Give {C:mult}+#1#{} Mult for each 4 scored",
+            "Gives {X:mult,C:white}X#2#{} Mult instead if held for #5# rounds",
+            "Gives {X:dark_edition,C:white}^#3#{} Mult instead if held for #6# rounds",
             "{C:inactive}(Currently #4# rounds)"
         }
     },
@@ -865,7 +865,7 @@ SMODS.Joker {
                 if card.ability.extra.heldrounds >= card.ability.extra.heldroundcap2 then
                     return {
                         Emult_mod = card.ability.extra.Emult,
-                        message = "^" .. number_format(card.ability.extra.Emult) .. " mult",
+                        message = "^" .. number_format(card.ability.extra.Emult) .. " Mult",
                         colour = G.C.DARK_EDITION,
                     }
                 elseif card.ability.extra.heldrounds >= card.ability.extra.heldroundcap1 then
@@ -891,9 +891,9 @@ SMODS.Joker {
     loc_txt = {
         name = "Woody",
         text = {
-            "Gives a {C:spectral}spectral{} card",
+            "Gives a {C:spectral}Spectral{} card",
             "if you end the round with",
-            "no hands to spare"
+            "{C:attention}no hands{} to spare"
         }
     },
     config = {
@@ -948,9 +948,9 @@ SMODS.Joker {
     loc_txt = {
         name = "Spongy",
         text = {
-            "Reduces joker slots by #1# every round",
-            "and gain {X:mult,C:white}X#2#{} mult",
-            "{C:inactive}(Minimum of 0 slots)(Currently {X:mult,C:white}X#3#{C:inactive} mult)"
+            "Reduces {C:attention}joker slots{} by #1# at the end of every round",
+            "and then this joker gains {X:mult,C:white}X#2#{} Mult",
+            "{C:inactive}(Minimum of 0 slots, Currently {X:mult,C:white}X#3#{C:inactive} Mult)"
         }
     },
     config = {
@@ -1003,9 +1003,9 @@ SMODS.Joker {
     loc_txt = {
         name = "Needle",
         text = {
-            "Gives {X:mult,C:white}X#1#{} mult and {X:chips,C:white}X#2#{} chips if",
-            "played hand does not contain sharp suits",
-            "and does not contain a #3#"
+            "{X:mult,C:white}X#1#{} Mult and {X:chips,C:white}X#2#{} Chips if",
+            "played hand does not contain {C:attention}sharp{} suits",
+            "and does not contain a {C:attention}#3#{}"
         }
     },
     config = {
@@ -1052,7 +1052,7 @@ SMODS.Joker {
         end 
     end,
 }
-
+-- blocky
 SMODS.Joker {
     key = "blocky",
     loc_txt = {
@@ -1060,8 +1060,8 @@ SMODS.Joker {
         text = {
             "This joker gains {X:mult,C:white}X#1#{} Mult",
             "if the sum of the ranks of all scored cards",
-            "is a perfect square",
-            "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} mult)}"
+            "is a {C:attention}perfect square{}",
+            "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)}"
         }
     },
     config = {
