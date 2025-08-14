@@ -11,7 +11,7 @@ SMODS.Joker {
         name = "Nickel",
         text = {
             "This joker gives",
-            "{X:chips,C:white}X#1# {} or {X:chips,C:white}X#2#{} chips, {X:mult,C:white}X#3# {} or {X:mult,C:white}X#4#{} mult,",
+            "{X:chips,C:white}X#1# {} or {X:chips,C:white}X#2#{} Chips, {X:mult,C:white}X#3# {} or {X:mult,C:white}X#4#{} Mult,",
             "and {C:money}$#5#{} or {C:money}$#6#{} at the end of the round."
         }
     },
@@ -90,10 +90,10 @@ SMODS.Joker {
     loc_txt = {
         name = "Bomby",
         text = {
-            "This joker's mult is multiplied by {X:mult,C:white}X#1#{} at the end of the round.",
+            "This joker's Mult is {C:attention}multiplied{} by {X:mult,C:white}X#1#{} at the end of the round.",
             "At the end of the round, it also has a",
-            "{C:green,E:1}(#3#^1.25)%{} chance this joker is destroyed.",
-            "{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} mult) (Currently {C:green,E:1}#2#%{C:inactive} chance to be destroyed)"
+            "{C:green,E:1}(#3#^1.25)%{} chance this joker is destroyed",
+            "{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult) (Currently {C:green,E:1}#2#%{C:inactive} chance to be destroyed)"
         }
     },
     config = {
@@ -125,9 +125,6 @@ SMODS.Joker {
     end,
     calculate = function(self, card, context)
         if context.joker_main then
-            resetflag1 = false
-            resetflag2 = false
-            resetflag3 = false
             return {
                 xmult = card.ability.extra.xmult
             }
@@ -172,9 +169,9 @@ SMODS.Joker {
     loc_txt = {
         name = "Book",
         text = {
-            "Whenever a joker (other than this one) is bought",
-            "gain {C:mult}+#1#{} mult",
-            "{C:inactive}(Currently {C:mult}+#2#{C:inactive} mult)"
+            "Whenever a {C:attention}joker{} (other than this one) is {C:attention}bought{}",
+            "gain {C:mult}+#1#{} Mult",
+            "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)"
         }
     },
     config = {
@@ -225,7 +222,9 @@ SMODS.Joker {
     loc_txt = {
         name = "Dora",
         text = {
-            "{C:inactive}I can't think of anything funny for this :)"
+            "At the end of the round",
+            "{C:green,E:1}#1# in #2#{} chance to create",
+            "{C:attention}#3#{} {C:dark_edition}negative{} {C:spectral}Soul{} cards"
         }
     },
     config = {
@@ -248,12 +247,14 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, card)
         return {
             vars = {
-
+                G.GAME.probabilities.normal,
+                card.ability.extra.odds,
+                card.ability.extra.soul_cards
             }
         }
     end,
     calculate = function(self, card, context)
-        if context.joker_main then
+        if context.end_of_round and not context.blueprint and not context.repetition and context.game_over == false then
             prob = G.GAME.probabilities.normal
             if pseudorandom("dora") < (prob/card.ability.extra.odds) then
                 for i = 1, card.ability.extra.soul_cards do
@@ -281,9 +282,9 @@ SMODS.Joker {
         name = "Fries",
         text = {
             "At the end of round, {C:green,E:1}#1# in #2#{} chance to",
-            "multiply mult by #3#",
-            "Otherwise, divide mult by #4#",
-            "{C:inactive} (Currently {X:mult,C:white}X#5#{C:inactive} mult) (FIXED PROBABILITY)"
+            "{C:attention}multiply{} Mult by #3#",
+            "Otherwise, {C:attention}divide{} Mult by #4#",
+            "{C:inactive} (Currently {X:mult,C:white}X#5#{C:inactive} Mult) (FIXED PROBABILITY)"
         }
     },
     config = {
@@ -344,11 +345,10 @@ SMODS.Joker {
     loc_txt = {
         name = "Gelatin",
         text = {
-            "This joker gains {X:chips,C:white}X#1#{} when a {C:attention}#2#{} is scored",
-            "{C:inactive}(Currently {X:chips,C:white}X#3#{C:inactive} chips)",
+            "This joker gains {X:chips,C:white}X#1#{} whenever a(n) {C:attention}#2#{} is scored",
+            "{C:inactive}(Currently {X:chips,C:white}X#3#{C:inactive} Chips)",
             "{C:inactive}(Rank changes at the end of every round)",
-            "{C:inactive}(Xchips is a hundredth of the current rank)",
-            "{C:inactive}(Aces are 1, Rank will never be a face card)"
+            "{C:inactive}(Rank will never be a face card)"
         }
     },
     config = {
@@ -396,7 +396,10 @@ SMODS.Joker {
         end
         if context.end_of_round and not context.repetition and context.game_over == false and not context.blueprint then
             rank = pseudorandom("gelatin",1,10)
-            card.ability.extra.rank = rank
+            if rank > 1 then
+                card.ability.extra.rank = rank
+            else
+                card.ability.extra.rank = "Ace"
             card.ability.extra.xchips_gain = card.ability.extra.rank/100
         end
     end,
@@ -407,9 +410,10 @@ SMODS.Joker {
     loc_txt = {
         name = "Puffball",
         text = {
-            "Changes the suit of every card",
-            "For each card changed, gain {X:mult,C:white}X#1#{} mult",
-            "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} mult)"
+            "Before a hand is scored",
+            "changes the {C:attention}suit{} of every scoring card",
+            "For each card changed, gain {X:mult,C:white}X#1#{} Mult",
+            "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)"
         }
     },
     config = {
@@ -465,8 +469,9 @@ SMODS.Joker {
     loc_txt = {
         name = "Ruby",
         text = {
-            "Destroys all held jokers, and gain {X:mult,C:white}X#1#{} mult and {X:chips,C:white}X#1#{} chips",
-            "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} mult and {X:chips,C:white}X#2#{C:inactive} chips)",
+            "Destroys {C:attention}all{} held jokers, and gain", 
+            "{X:mult,C:white}X#1#{} Mult and {X:chips,C:white}X#1#{} Chips per Joker destroyed",
+            "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult and {X:chips,C:white}X#2#{C:inactive} Chips)",
             " ",
             "{C:inactive,s:0.8}Trust me, I am desprate to win this run."
         }
@@ -542,7 +547,7 @@ SMODS.Joker {
         name = "Yellow Face",
         text = {
             "At the start and end of the round",
-            "create a random {C:dark_edition}negative{} consumeable for {C:money}$#1#"
+            "create a random consumeable for {C:money}$#1#"
         }
     },
     config = {
@@ -586,7 +591,7 @@ SMODS.Joker {
                 func = (function()
                     local new_card = SMODS.add_card {
                         set = typecard,
-                        key_append = 'j_bfdi_woody',
+                        key_append = 'j_bfdi_yellowface',
                     }
                     G.GAME.consumeable_buffer = 0
                     typenum = pseudorandom("yellowface",1,3)
@@ -617,7 +622,7 @@ SMODS.Joker {
     loc_txt = {
         name = "Donut",
         text = {
-            "{X:mult,C:white}X#1#{} mult if it is {C:attention}Summer{}"
+            "{X:mult,C:white}X#1#{} Mult if it is {C:attention}Summer{}"
         }
     },
     config = {
