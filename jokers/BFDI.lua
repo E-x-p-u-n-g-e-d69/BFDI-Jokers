@@ -636,9 +636,9 @@ SMODS.Joker {
     loc_txt = {
         name = "Rocky",
         text = {
-            "This joker gains {X:dark_edition, C:white}^#1#{} Mult",
+            "This joker gains {X:dark_edition,C:white}^#1#{} Mult",
             "if played hand is a {C:attention}Flush Five{}",
-            "{C:inactive}(Currently {X:dark_edition, C:white}^#2#{C:inactive} Mult)"
+            "{C:inactive}(Currently {X:dark_edition,C:white}^#2#{C:inactive} Mult)"
         }
     },
     config = {
@@ -820,7 +820,7 @@ SMODS.Joker {
     loc_txt = {
         name = "Pen",
         text = {
-            "Give {C:mult}+#1#{} Mult for each 4 scored",
+            "Give {C:mult}+#1#{} Mult for each {C:attention}4{} scored",
             "Gives {X:mult,C:white}X#2#{} Mult instead if held for #5# rounds",
             "Gives {X:dark_edition,C:white}^#3#{} Mult instead if held for #6# rounds",
             "{C:inactive}(Currently #4# rounds)"
@@ -1053,58 +1053,66 @@ SMODS.Joker {
     end,
 }
 -- blocky
--- SMODS.Joker {
---     key = "blocky",
---     loc_txt = {
---         name = "Blocky",
---         text = {
---             "This joker gains {X:mult,C:white}X#1#{} Mult",
---             "if the sum of the ranks of all scored cards",
---             "is a {C:attention}perfect square{}",
---             "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult)}"
---         }
---     },
---     config = {
---         extra = {
---             xmult_gain = 0.5,
---             xmult = 1
---         }
---     },
---     rarity = 2,
---     atlas = "BFDI",
---     pos = {
---         x = 0,
---         y = 2
---     },
---     cost = 6,
---     blueprint_compat = true,
---     eternal_compat = true,
---     perishable_compat = true,
---     rental_compat = true,
---     loc_vars = function(self, info_queue, card)
---         return {
---             vars = {
---                 card.ability.extra.xmult_gain,
---                 card.ability.extra.xmult
---             }
---         }
---     end,
---     calculate = function(self, card, context)
---         if context.before and not context.blueprint and context.cardarea == G.PLAY and then
---             card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_gain
---             return {
---                 message = localize('k_upgrade_ex'),
---                 colour = G.C.MULT,
---                 message_card = card
---             }
---         end
---         if context.joker_main then
---             return {
---                 xmult = card.ability.extra.xmult
---             }
---         end
---     end,
--- }
+SMODS.Joker {
+    key = "blocky",
+    loc_txt = {
+        name = "Blocky",
+        text = {
+            "This joker gains {X:mult,C:white}X#1#{} Mult",
+            "if the sum of the ranks of all scored cards",
+            "is a {C:attention}perfect square{}",
+            "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult){}",
+            "{C:inactive}(A = 14, K = 13, Q = 12, J = 11){}"
+        }
+    },
+    config = {
+        extra = {
+            xmult_gain = 0.5,
+            xmult = 1,
+            hand_total = 0
+        }
+    },
+    rarity = 2,
+    atlas = "BFDI",
+    pos = {
+        x = 0,
+        y = 2
+    },
+    cost = 6,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    rental_compat = true,
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = {
+                card.ability.extra.xmult_gain,
+                card.ability.extra.xmult
+            }
+        }
+    end,
+    calculate = function(self, card, context)
+        if context.before and not context.blueprint then
+            for _, c in ipairs(context.scoring_hand) do
+                card.ability.extra.hand_total = card.ability.extra.hand_total + c:get_id()
+            end
+            if math.sqrt(card.ability.extra.hand_total) == math.floor(math.sqrt(card.ability.extra.hand_total)) then
+                card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_gain
+                return {
+                    message = localize('k_upgrade_ex'),
+                    colour = G.C.MULT,
+                    message_card = card
+                }
+            end
+        end
+        if context.joker_main then
+            card.ability.extra.hand_total = 0
+            return {
+                xmult = card.ability.extra.xmult
+            }
+        end
+    end,
+}
 --[[
 SMODS.Joker {
     key = "",

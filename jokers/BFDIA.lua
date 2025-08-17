@@ -353,7 +353,7 @@ SMODS.Joker {
     },
     config = {
         extra = {
-            rank = 1,
+            rank = "Ace",
             xchips_gain = 0.01,
             xchips = 1
         }
@@ -379,8 +379,6 @@ SMODS.Joker {
         }
     end,
     calculate = function(self, card, context)
-        if context.individual then
-        end
         if context.individual and context.cardarea == G.play and (context.other_card:get_id() == card.ability.extra.rank or (context.other_card:get_id() == 14 and card.ability.extra.rank == 1)) and not context.blueprint then
             card.ability.extra.xchips = card.ability.extra.xchips + card.ability.extra.xchips_gain
             return {
@@ -400,9 +398,10 @@ SMODS.Joker {
                 card.ability.extra.rank = rank
             else
                 card.ability.extra.rank = "Ace"
+            end
             card.ability.extra.xchips_gain = card.ability.extra.rank/100
         end
-    end,
+    end
 }
 -- puffball TODO: fix animation
 SMODS.Joker {
@@ -473,7 +472,7 @@ SMODS.Joker {
             "{X:mult,C:white}X#1#{} Mult and {X:chips,C:white}X#1#{} Chips per Joker destroyed",
             "{C:inactive}(Currently {X:mult,C:white}X#2#{C:inactive} Mult and {X:chips,C:white}X#2#{C:inactive} Chips)",
             " ",
-            "{C:inactive,s:0.8}Trust me, I am desprate to win this run."
+            "{C:inactive,s:0.8}Trust me, I am desprate to win this run. - Ruby, BFDIA 7"
         }
     },
     config = {
