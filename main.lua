@@ -22,7 +22,7 @@ local BFDITabs = function()
                 })
                 settings.nodes[#settings.nodes + 1] = create_toggle({
                     active_colour = G.C.RED,
-                    label = "BFDIA Jokers (UNFINISHED)",
+                    label = "BFDIA Jokers",
                     ref_table = CFG.BFDI,
                     ref_value = "bfdia_jokers",
                 })
@@ -49,6 +49,6 @@ SMODS.current_mod.extra_tabs = BFDITabs
 if CFG.BFDI.bfdi_jokers ~= false then
     assert(SMODS.load_file("jokers/BFDI.lua"))()
 end
--- if CFG.BFDI.bfdia_jokers ~= false then
---     assert(SMODS.load_file("jokers/BFDIA.lua"))()
--- end
+if CFG.BFDI.bfdia_jokers ~= false then
+    assert(SMODS.load_file("jokers/BFDIA.lua"))()
+end
