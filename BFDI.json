@@ -6,9 +6,10 @@
 	"prefix": "bfdi",
 	"main_file": "main.lua",
 	"priority": 0,
-	"version": "1.1.0~ALPHA",
+	"version": "1.1.0~BETA",
 	"dependencies": [
         "Steamodded (>=1.0.0~)",
         "Talisman (>=1.0.0~)"
     ]
+
 }
