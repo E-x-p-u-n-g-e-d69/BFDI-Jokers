@@ -3,7 +3,7 @@ function hasJoker(key)
 end
 SMODS.Atlas{
     key = 'BFDI',
-    path = 'bfdi.png',
+    path = 'jokers/bfdi.png',
     px = 71,
     py = 95
 }

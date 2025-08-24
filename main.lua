@@ -47,8 +47,8 @@ local BFDITabs = function()
 end
 SMODS.current_mod.extra_tabs = BFDITabs
 if CFG.BFDI.bfdi_jokers ~= false then
-    assert(SMODS.load_file("jokers/BFDI.lua"))()
+    assert(SMODS.load_file("items/jokers/BFDI.lua"))()
 end
 if CFG.BFDI.bfdia_jokers ~= false then
-    assert(SMODS.load_file("jokers/BFDIA.lua"))()
+    assert(SMODS.load_file("items/jokers/BFDIA.lua"))()
 end

@@ -1,6 +1,6 @@
 SMODS.Atlas{
     key = 'BFDIA',
-    path = 'bfdia.png',
+    path = 'jokers/bfdia.png',
     px = 71,
     py = 95
 }
